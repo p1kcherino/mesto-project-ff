@@ -15,8 +15,8 @@ function createCard(item, cardRemove) {
 }
 
 function cardRemove(card) {
- card.remove(); 
-  }; 
+  card.remove();
+}
 
 initialCards.forEach(function (item) {
   placesList.append(createCard(item, cardRemove));
