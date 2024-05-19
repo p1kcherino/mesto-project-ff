@@ -44,9 +44,11 @@ const popupFormNewCard = popupTypeNewCard.querySelector(".popup__form");
 const inputNameNewCard = popupTypeNewCard.querySelector(
   ".popup__input_type_card-name"
 );
+
 const inputUrlImageNewCard = popupFormNewCard.querySelector(
   ".popup__input_type_url"
 );
+
 const profileAddButtonNewCard = document.querySelector(".profile__add-button");
 
 profileAddButtonNewCard.addEventListener("click", () => {
@@ -63,6 +65,7 @@ function addCardNew(event) {
     link: inputUrlImageNewCard.value,
     name: inputNameNewCard.value,
   };
+
   placesList.prepend(createCard(newCard, cardRemove, cardLike));
   closePopup(popupTypeNewCard);
   popupFormNewCard.reset();
