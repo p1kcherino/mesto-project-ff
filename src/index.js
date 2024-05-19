@@ -5,16 +5,17 @@ import { openPopup, closePopup } from './script/modal.js';
 const cardTemplate = document.querySelector("#card-template").content;
 const placesList = document.querySelector(".places__list");
 
-function createCard(item, cardRemove) {
+function createCard(item, cardRemove, cardLike) {
   const card = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = card.querySelector(".card__image");
   const removeButton = card.querySelector(".card__delete-button");
+  const cardLikeButton = card.querySelector(".card__like-button");
 
   card.querySelector(".card__title").textContent = item.name;
   cardImage.alt = item.name;
   cardImage.src = item.link;
   removeButton.addEventListener("click", () => cardRemove(card));
-
+  cardLikeButton.addEventListener('click', cardLike);
   return card;
 }
 
@@ -23,8 +24,12 @@ function cardRemove(card) {
 }
 
 initialCards.forEach(function (item) {
-  placesList.append(createCard(item, cardRemove));
+  placesList.append(createCard(item, cardRemove, cardLike));
 });
+
+function cardLike(event) {
+ event.target.classList.toggle("card__like-button_is-active")
+}
 
 const popupTypeEdit = document.querySelector(".popup_type_edit");
 const popupButtonClose = popupTypeEdit.querySelector(".popup__close");
@@ -74,10 +79,11 @@ function addCardNew(event) {
   link: inputUrlImageNewCard.value,
   name: inputNameNewCard.value
  };
- placesList.prepend(createCard(newCard, cardRemove));
+ placesList.prepend(createCard(newCard, cardRemove, cardLike));
  closePopup(popupTypeNewCard);
  popupFormNewCard.reset();
 }
 
 popupFormNewCard.addEventListener('submit', addCardNew);
+
 
