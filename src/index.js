@@ -1,6 +1,6 @@
 import './pages/index.css';
 import { initialCards  } from './script/cards.js';
-import { openPopup } from './script/popap.js';
+import { openPopup, closePopup } from './script/popap.js';
 
 const cardTemplate = document.querySelector("#card-template").content;
 const placesList = document.querySelector(".places__list");
@@ -27,18 +27,30 @@ initialCards.forEach(function (item) {
 });
 
 const popupTypeEdit = document.querySelector(".popup_type_edit");
-const popupButtonClose = popupTypeEdit.querySelector(".popup_close");
+const popupButtonClose = popupTypeEdit.querySelector(".popup__close");
 const popupForm = popupTypeEdit.querySelector(".popup__form");
 const inputName = document.querySelector(".popup__input_type_name");
 const inputDescription = document.querySelector(".popup__input_type_description");
-
 const profileEditButton = document.querySelector(".profile__edit-button");
-const profileTitle = document.querySelector(".profile_title");
+const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 
-
-function openPopupEdit() {
- openPopup(popupTypeEdit);
+function handleFormSubmit(event){ 
+ event.preventDefault();
+ profileTitle.textContent = inputName.value;
+ profileDescription.textContent = inputDescription.value;
+ closePopup(popupTypeEdit);
 }
 
-profileEditButton.addEventListener('click', openPopupEdit);
+profileEditButton.addEventListener('click', () => {
+ inputName.value = profileTitle.textContent;
+ inputDescription.value = profileDescription.textContent;
+ openPopup(popupTypeEdit); 
+});
+
+popupForm.addEventListener('submit', handleFormSubmit);
+popupButtonClose.addEventListener('click', function() {
+ closePopup(popupTypeEdit);
+});
+
+
