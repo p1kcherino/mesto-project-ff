@@ -1,6 +1,8 @@
 export function openPopup(popup) {
-  popup.classList.add("popup_is-opened");
-  popup.classList.add("popup_is-animated");
+ popup.classList.add("popup_is-animated")
+ setTimeout(() => {
+   popup.classList.add("popup_is-opened");
+ }, 1); 
   popup.addEventListener("click", closePopupOverlay);
   document.addEventListener("keydown", closePopupEsc);
 }
@@ -13,8 +15,7 @@ export function closePopup(popup) {
 
 export function closePopupOverlay(evt) {
   if (evt.currentTarget === evt.target) {
-    const popupOpen = document.querySelector(".popup_is-opened");
-    closePopup(popupOpen);
+   closePopup(evt.currentTarget);
   }
 }
 
