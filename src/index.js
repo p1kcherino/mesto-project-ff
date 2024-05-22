@@ -6,7 +6,7 @@ import { createCard, removeCard, likeCard } from "./companents/card.js";
 const placesList = document.querySelector(".places__list");
 
 initialCards.forEach(function (item) {
-  placesList.append(createCard(item, removeCard, likeCard));
+  placesList.append(createCard(item, removeCard, likeCard, handleImageClick));
 });
 
 const popupTypeEdit = document.querySelector(".popup_type_edit");
@@ -57,8 +57,9 @@ function addCardNew(event) {
     name: inputNameNewCard.value,
   };
 
-  placesList.prepend(createCard(newCard, removeCard, likeCard));
+  placesList.prepend(createCard(newCard, removeCard, likeCard, handleImageClick));
   popupFormNewCard.reset();
+  closePopup(popupTypeNewCard);
 }
 
 popupFormNewCard.addEventListener("submit", addCardNew);
@@ -67,7 +68,7 @@ const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
 
-export function handleImageClick(item) {
+  function handleImageClick(item) {
   popupImage.src = item.link;
   popupImage.alt = item.name;
   popupCaption.textContent = item.name;

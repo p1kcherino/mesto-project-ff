@@ -1,8 +1,7 @@
-import { handleImageClick } from "../index.js";
 
 const cardTemplate = document.querySelector("#card-template").content;
 
-export function createCard(item, removeCard, likeCard) {
+export function createCard(item, removeCard, likeCard,handleImageClick) {
   const card = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = card.querySelector(".card__image");
   const removeButton = card.querySelector(".card__delete-button");
