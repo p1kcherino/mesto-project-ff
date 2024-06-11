@@ -25,3 +25,29 @@
     line-height: 17px;
   }
 }
+
+.form__input_type_error {
+ border-bottom-color: red;
+}
+
+.form__error-active {
+ display: block;
+}
+
+.button-inactive {
+ cursor: default;
+ background-color: rgba(211, 211, 211, 0.6);
+}
+
+.popup__button_disabled {
+ background: #fff; 
+ color: #000; 
+ border: 1px solid #000; 
+ opacity: 0.2;
+ cursor: not-allowed;
+}
+
+.popup__save-button_disabled {
+ background-color: #c4c4c4; 
+ cursor: not-allowed;
+}

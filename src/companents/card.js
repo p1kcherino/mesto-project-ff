@@ -6,6 +6,7 @@ export function createCard(item, removeCard, likeCard,handleImageClick) {
   const cardImage = card.querySelector(".card__image");
   const removeButton = card.querySelector(".card__delete-button");
   const cardLikeButton = card.querySelector(".card__like-button");
+  const likeCount = card.querySelector(".card__like-count");
 
   card.querySelector(".card__title").textContent = item.name;
   cardImage.alt = item.name;
@@ -15,7 +16,10 @@ export function createCard(item, removeCard, likeCard,handleImageClick) {
   cardImage.addEventListener("click", () => {
     handleImageClick(item);
   });
-
+  cardLikeButton.addEventListener('click', () => {
+   const currentCount = parseInt(likeCount.textContent);
+   likeCount.textContent = currentCount +1;
+  })
   return card;
 }
 
@@ -26,3 +30,4 @@ export function removeCard(card) {
 export function likeCard(event) {
   event.target.classList.toggle("card__like-button_is-active");
 }
+
