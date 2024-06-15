@@ -1,3 +1,13 @@
+export {
+ toggleButtonState,
+ setEventListeners,
+ enableValidation,
+ clearValidation,
+ showInputError,
+ isValidUrl,
+};
+
+
 function isValid(form, input, validationConfig) {
   if (input.validity.patternMismatch) {
     input.setCustomValidity(input.dataset.errorMessage);
@@ -12,15 +22,6 @@ function isValid(form, input, validationConfig) {
   }
 }
 
-function showInputError(formElement, inputElement, errorMessage, config) {
-  const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
-  if (errorElement) {
-    inputElement.classList.add(config.inputErrorClass);
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add(config.errorClass);
-  }
-}
-
 function hideInputError(formElement, inputElement, config) {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
   if (errorElement) {
@@ -28,6 +29,15 @@ function hideInputError(formElement, inputElement, config) {
     errorElement.textContent = "";
     errorElement.classList.remove(config.errorClass);
   }
+}
+
+function showInputError(formElement, inputElement, errorMessage, config) {
+ const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+ if (errorElement) {
+   inputElement.classList.add(config.inputErrorClass);
+   errorElement.textContent = errorMessage;
+   errorElement.classList.add(config.errorClass);
+ }
 }
 
 function toggleButtonState(inputList, buttonElement, config) {
@@ -112,12 +122,3 @@ const validationConfig = {
 };
 
 enableValidation(validationConfig);
-
-export {
-  toggleButtonState,
-  setEventListeners,
-  enableValidation,
-  clearValidation,
-  showInputError,
-  isValidUrl,
-};

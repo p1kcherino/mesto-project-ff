@@ -1,4 +1,6 @@
-
+export {
+ getAddNewCard, getInfoUser, addCardServer, getUserDataServer, likeCardApi, deletLikeCardApi, deleteCardApi, changeAvatar
+}
 const PATH = {
  baseUrl: 'https://mesto.nomoreparties.co/v1/wff-cohort-15',
  headers: {
@@ -76,9 +78,4 @@ const changeAvatar = (avatar) => {
    avatar: avatar
   })
  }).then(handleRes)
-}
-
-
-export {
- getAddNewCard, getInfoUser, addCardServer, getUserDataServer, likeCardApi, deletLikeCardApi, deleteCardApi, changeAvatar
 }
