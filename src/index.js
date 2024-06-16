@@ -18,12 +18,12 @@ const imagePopup = document.querySelector(".popup_type_image"); // Попап д
 
 const popupFormNewCard = popupTypeNewCard.querySelector(".popup__form"); // Форма добавления карточки
 const formAddCard = document.forms["new-place"]; // Форма добавления новой карточки
-const formEditAvatar = document.forms["profile-edit-avatar"];// Форма смены аватарки
+const formEditAvatar = document.forms["profile-edit-avatar"]; // Форма смены аватарки
 const nameInputCard = formAddCard.elements["place-name"]; // Инпут названия новой карточки
 
 const popupImage = document.querySelector(".popup__image"); // Попап раскрытой картинки
 const popupCaption = document.querySelector(".popup__caption"); // Название карточки = текст под раскрытой картинкой
-const inputEditAvatr = formEditAvatar.querySelector('.popup__input_type_url');
+const inputEditAvatr = formEditAvatar.querySelector(".popup__input_type_url");
 const popupTypeEdit = document.querySelector(".popup_type_edit"); // Попап редактирования профиля
 const inputName = popupTypeEdit.querySelector(".popup__input_type_name"); // Инпут имя попапа
 const inputDescription = popupTypeEdit.querySelector(
@@ -41,8 +41,7 @@ const linkInputCard = formAddCard.elements.link; // Ссылка на карти
 const buttonFormCard = formAddCard.querySelector(".popup__button"); //Кнопка добавления новой карточки
 const buttonFormProfile = popupTypeEdit.querySelector(".popup__button"); //Кнопка добавления нового имяни и должности
 const closeButton = document.querySelectorAll(".popup__close"); // Крестик для закрытия попапа
-const buttonFormAvatar = popupTypeAvatar.querySelector(".popup__button"); // Кнопка смены аватарки в попапе 
-
+const buttonFormAvatar = popupTypeAvatar.querySelector(".popup__button"); // Кнопка смены аватарки в попапе
 
 //API
 let userId = "";
@@ -52,9 +51,9 @@ Promise.all([getInfoUser(), getAddNewCard()])
     profileTitle.textContent = userData.name;
     profileDescription.textContent = userData.about;
     profileImage.setAttribute(
-     "style",
-     `background-image: url('${userData.avatar}')`
-   );
+      "style",
+      `background-image: url('${userData.avatar}')`
+    );
     initialCards.forEach((item) => {
       const cardElm = createCard(
         item,
@@ -132,24 +131,27 @@ function saveButton(loader, button) {
   }
 }
 
-//Функция изменения аватара 
+//Функция изменения аватара
 function editAvatar(event) {
- event.preventDefault();
- saveButton(true, buttonFormAvatar);
- const avatar = inputEditAvatr.value;
- changeAvatar(avatar)
- .then((item) => {
-  profileImage.style.backgroundImage = `url(${item.avatar})`;
-  closePopup(popupTypeAvatar);
-  formEditAvatar.reset();
- })
- .finally(() => {
-  saveButton(false, buttonFormAvatar);
- })
- clearValidation(popupTypeAvatar, validationConfig);
-};
+  event.preventDefault();
+  saveButton(true, buttonFormAvatar);
+  const avatar = inputEditAvatr.value;
+  changeAvatar(avatar)
+    .then((item) => {
+      profileImage.style.backgroundImage = `url(${item.avatar})`;
+      closePopup(popupTypeAvatar);
+      clearValidation(popupTypeAvatar, validationConfig);
+      formEditAvatar.reset();
+    })
+    .catch((err) => {
+      console.log("Oшибка при изменении аватара:", err);
+    })
+    .finally(() => {
+      saveButton(false, buttonFormAvatar);
+    });
+}
 
-formEditAvatar.addEventListener('submit', editAvatar);
+formEditAvatar.addEventListener("submit", editAvatar);
 
 //Раскрытие картинки карточки на весь экран
 function handleImageClick(item) {

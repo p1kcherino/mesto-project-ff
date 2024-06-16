@@ -53,15 +53,23 @@ export function createCard(
 //Функция лайка и дизлайка карточки
 export function likeCard(cardLikeButton, likeCount, cardId) {
   if (cardLikeButton.classList.contains("card__like-button_is-active")) {
-    deletLikeCardApi(cardId).then((res) => {
-      cardLikeButton.classList.remove("card__like-button_is-active");
-      likeCount.textContent = res.likes.length;
-    });
+    deletLikeCardApi(cardId)
+      .then((res) => {
+        cardLikeButton.classList.remove("card__like-button_is-active");
+        likeCount.textContent = res.likes.length;
+      })
+      .catch((err) => {
+        console.log(`Ошибка снятия лайка:`, err);
+      });
   } else {
-    likeCardApi(cardId).then((res) => {
-      cardLikeButton.classList.add("card__like-button_is-active");
-      likeCount.textContent = res.likes.length;
-    });
+    likeCardApi(cardId)
+      .then((res) => {
+        cardLikeButton.classList.add("card__like-button_is-active");
+        likeCount.textContent = res.likes.length;
+      })
+      .catch((err) => {
+        console.log(`Ошибка постановки лайка:`, err);
+      });
   }
 }
 
