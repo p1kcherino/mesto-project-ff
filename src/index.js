@@ -140,8 +140,8 @@ function editAvatar(event) {
     .then((item) => {
       profileImage.style.backgroundImage = `url(${item.avatar})`;
       closePopup(popupTypeAvatar);
-      clearValidation(popupTypeAvatar, validationConfig);
       formEditAvatar.reset();
+      clearValidation(popupTypeAvatar, validationConfig);
     })
     .catch((err) => {
       console.log("Oшибка при изменении аватара:", err);
